@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Keranjang</title>
+</head>
+
+    <h1>Keranjang</h1>
+
+    <a href="/" style="text-decoration:none">Kembali Ke Products</a><br/>
+
+    <h4>
+        Anda memiliki
+        <span th:text="${itemsInCart}"></span>
+        <span th:if="${itemsInCart == 1}">item</span>
+        <span th:unless="${itemsInCart == 1}">item</span>
+        di dalam keranjang.
+    </h4>
+
+    <script>
+        let qtyDropDown;
+        let cartItemQtyOption;
+    </script>
+
+    <tr th:each="item: ${cartItems}">
+        <div>
+            Nama     : <span th:text="${item.name}"></span><br>
+            Harga    : Rp.<span th:text="${item.price}"></span><br>
+            Jumlah   : <span th:text="${item.quantity}"></span><br>
+            Subtotal : Rp.<span th:text="${item.price * item.quantity}"></span><br>
+        </div>
+        <form action="#" th:action="@{/cart/} + ${item.cartID}" th:method="patch" th:object="${itemData}">
+            <input type="hidden" name="productID" th:value="${item.productID}">
+            <input type="hidden" name="inStock" th:value="${item.inStock}">
+            <input type="hidden" name="currentQty" th:value="${item.quantity}">
+            <select name="newQty" th:id="qty-drop-down- + ${item.cartID}">
+                <option th:each="i : ${#numbers.sequence(0, item.inStock + item.quantity)}" th:value="${i}" th:text="${i}">
+                </option>
+            </select>
+            <input type="submit" value="Edit Qty">
+        </form><br>
+
+        <script>
+            qtyDropDown = document.getElementById('qty-drop-down-[[${item.cartID}]]');
+            qtyDropDownOption = qtyDropDown[String([[${item.quantity}]])];
+            qtyDropDownOption.selected = true;
+        </script>
+    </tr>
+
+    <h4>Total : Rp.<span th:text="${cartTotal}"></span></h4>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+</head>
+<body>
+<h1>Products</h1>
+
+<a href="/cart" style="text-decoration:none">Kembali ke Keranjang (<span th:text="${itemsInCart}"></span>)</a><br/><br/>
+
+<tr th:each="product: ${products}">
+    <div>
+        Nama : <span th:text="${product.name}"></span><br/>
+        Harga : Rp. <span th:text="${product.price}"></span><br/>
+    </div>
+    <span th:if="${product.inStock > 0}"><form action="#" th:action="@{/cart}" method="post" th:object="${cartItem}">
+            <input type="hidden" th:value="${product.productID}" name="productID">
+            <select th:field="*{quantity}">
+                <option th:each="i : ${#numbers.sequence(1, product.inStock)}" th:value="${i}" th:text="${i}">
+                </option>
+            </select>
+            <input type="submit" value="Add To Cart">
+        </form></span>
+    <span th:unless="${product.inStock > 0}"><div>Stock Sedang Kosong</div></span><br>
+</tr>
+</body>
+</html>
