@@ -1,6 +1,8 @@
 package com.test.shoppingcart.models;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+
+import jakarta.persistence.*;
 
 @Entity(name = "cart")
 public class CartItem {

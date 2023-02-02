@@ -1,6 +1,7 @@
 package com.test.shoppingcart.models;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+
 import java.math.BigDecimal;
 
 @Entity(name = "products")
