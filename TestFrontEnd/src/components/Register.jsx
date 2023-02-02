@@ -6,9 +6,11 @@ import logo from '../assets/img/logo.png'
 export const Register = () => {
 
   const [uname, setuname] = useState("")
+  const [urole, seturole] = useState("")
   const [umobile, setumobile] = useState("")
   const [uemail, setuemail] = useState("")
   const [upass, setupass] = useState("")
+  
 
   const navigate = useNavigate()
 
@@ -20,10 +22,11 @@ export const Register = () => {
 
   const register = () => {
     localStorage.setItem("uname", uname);
+    localStorage.setItem("urole", urole);
     localStorage.setItem("umobile", umobile);
     localStorage.setItem("uemail", uemail);
     localStorage.setItem("upass", upass);
-    alert(uname + " : " + umobile + " : " + uemail + " : " + upass + " | " + " Register Successful!")
+    alert(uname + " : " + urole + " : "+ umobile + " : " + uemail + " : " + upass + " | " + " Register Successful!")
   }
 
   return (
@@ -54,6 +57,16 @@ export const Register = () => {
                       <label for="yourName" class="form-label">Nama</label>
                       <input type="text" name="name" value={uname} onChange={(e) => { setuname(e.target.value) }} class="form-control" id="yourName" required />
                       <div class="invalid-feedback">Please, enter your name!</div>
+                    </div>
+
+                    <div class="col-12">
+                      <label for="yourRole" class="form-label"> Role </label>
+                      <select name="role" value={urole} onChange={(e) =>{ seturole(e.target.value) }} class="form-control" id="yourRole" required >
+                        <option value=" " disabled> </option>
+                        <option value="User"> User </option>
+                        <option value="Admin"> Admin </option>
+                      </select>
+                      <div class="invalid-feedback">Please enter your role!</div>
                     </div>
 
                     <div class="col-12">

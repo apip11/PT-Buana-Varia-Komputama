@@ -9,6 +9,7 @@ export const Dashboard = () => {
     let upass = localStorage.getItem("upass");
     let uname = localStorage.getItem("uname");
     let umobile = localStorage.getItem("umobile");
+    let urole = localStorage.getItem("urole");
 
     const navigate = useNavigate();
 
@@ -24,6 +25,7 @@ export const Dashboard = () => {
         localStorage.removeItem("upass")
         localStorage.removeItem("uname")
         localStorage.removeItem("umobile")
+        localStorage.removeItem("urole")
 
         window.location.reload()
     }
@@ -42,6 +44,7 @@ export const Dashboard = () => {
                 <h2>Nomor Telepon : {umobile}</h2>
                 <h2>Email : {uemail}</h2>
                 <h2>Pass : {upass}</h2>
+                <h2>Role : {urole}</h2>
 
             </div>
         </div >
